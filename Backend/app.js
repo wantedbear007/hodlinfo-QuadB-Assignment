@@ -3,7 +3,10 @@ const app = express();
 const bodyParser = require("body-parser");
 const DatabaseConnection = require("./res/connection.js");
 const Handlers = require("./res/Handlers.js");
+const cors = require("cors")
 const Utils = require("./utils/utils.js");
+
+app.use(cors())
 
 const port = 3000;
 const baseUrl = "/api/v1";
