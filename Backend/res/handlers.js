@@ -31,11 +31,7 @@ class Handlers {
   // to upload data in mysql database
   updatePrices = async (database) => {
     const res = await this.fetchPrices();
-    const resKeys = Object.keys(res);
 
-    resKeys.forEach((key) => {
-      console.log(key);
-    });
     await database.userQuery(Utils.dropTablesQuery);
     await database.userQuery(Utils.createTableQuery);
 
@@ -49,7 +45,5 @@ class Handlers {
     }
   };
 }
-
-
 
 module.exports = Handlers;

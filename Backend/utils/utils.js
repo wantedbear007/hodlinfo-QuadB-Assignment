@@ -21,6 +21,8 @@ class Utils {
 `;
 
   static baseUrl = "https://api.wazirx.com/api/v2/tickers";
+
+  static apiKey = "12212215";
 }
 
 module.exports = Utils;

@@ -31,14 +31,11 @@ class DatabaseConnection {
       try {
         this.conn.query(q, function (err, result, fields) {
           if (!err) {
-            console.log(result);
-            // console.log(fields)
             resolve(result);
-            // return result;
+            return result;
           } else {
             console.log(err);
             reject(err);
-            // return false;
           }
         });
       } catch (err) {
@@ -47,21 +44,6 @@ class DatabaseConnection {
         // return false;
       }
     });
-    // try {
-    //   this.conn.query(q, function(err, result, fields) {
-    //     if (!err) {
-    //       console.log(result)
-    //       // console.log(fields)
-    //       return result;
-    //     } else {
-    //       console.log(err);
-    //       return false;
-    //     }
-    //   })
-    // } catch (err) {
-    //   console.log(err);
-    //   return false;
-    // }
   };
 }
 
