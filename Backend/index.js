@@ -1,17 +1,25 @@
-const mysql = require("mysql");
-const axios = require("axios");
 const connection = require("./res/connection.js");
-const handler = require("./res/Handlers.js");
+const Handlers = require("./res/Handlers.js");
 
 console.log("server started !");
 
-connection()
-const lol = async () => {
-    const hand = await handler();
-    console.log(Object.keys(hand))
-}
+// api endpoint
+const baseUrl = "https://api.wazirx.com/api/v2/tickers";
 
-lol()
+// establishing connection
+connection();
+
+const handler = new Handlers(baseUrl);
+const lol = async () => {
+  const res = await handler.fetchPrices();
+  const resKeys = Object.keys(res);
+
+  resKeys.forEach((key) => {
+    console.log(key);
+  });
+};
+
+lol();
 
 // console.log(lol.connect())
 // const estConnection = () => {
