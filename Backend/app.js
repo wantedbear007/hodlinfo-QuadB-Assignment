@@ -3,10 +3,19 @@ const app = express();
 const bodyParser = require("body-parser");
 const DatabaseConnection = require("./res/connection.js");
 const Handlers = require("./res/Handlers.js");
-const cors = require("cors")
+const cors = require("cors");
 const Utils = require("./utils/utils.js");
+require("dotenv").config();
 
-app.use(cors())
+
+app.use(cors());
+
+const dbHost = process.env.DB_HOST;
+const dbUser = process.env.DB_USER;
+const dbPassword = process.env.DB_PASSWORD;
+
+
+
 
 const port = 3000;
 const baseUrl = "/api/v1";
@@ -19,7 +28,12 @@ database.establishConnection();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => {
+// app.use((req, res, next) => {
+//   res.status(404).send({ message: "Not Found" });
+// });
+
+// to check API status
+app.get("/api/v1/status", (req, res) => {
   const resObj = {
     status: "Active",
     author: "@wantedbear007",
@@ -32,6 +46,7 @@ app.get("/", (req, res) => {
   }
 });
 
+// to get prices
 app.get(baseUrl + "/prices", async (req, res) => {
   try {
     const dbResponse = await database.userQuery("select * from prices");
@@ -41,7 +56,8 @@ app.get(baseUrl + "/prices", async (req, res) => {
   }
 });
 
-app.post(baseUrl + "/data", (req, res) => {
+// to update prices
+app.post(baseUrl + "/updateprices", (req, res) => {
   try {
     const body = req.body["key"];
     if (body != Utils.apiKey) {

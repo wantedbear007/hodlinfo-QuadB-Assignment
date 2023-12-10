@@ -1,15 +1,17 @@
 const mysql = require("mysql");
 
-// establish mysql connection
-
 class DatabaseConnection {
   // to establish connection
   establishConnection = () => {
+    const dbHost = process.env.DB_HOST;
+    const dbUser = process.env.DB_USER;
+    const dbPassword = process.env.DB_PASSWORD;
+
     try {
       var conn = mysql.createConnection({
-        host: "localhost",
-        user: "wanted",
-        password: "wanted",
+        host: dbHost,
+        user: dbUser,
+        password: dbPassword,
         database: "crypto",
       });
 
